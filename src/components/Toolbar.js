@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Toolbar = ({ messages, selectAll, markAsRead, markAsUnread, applyLabel, removeLabel, deleteMessages }) => {
+const Toolbar = ({ messages, selectAll, markAsRead, markAsUnread, applyLabel, compose, removeLabel, deleteMessages }) => {
   const unreadCount = messages.filter(message => !message.read).length
   const selectedCount = messages.filter(message => message.selected).length
   let selectAllClass
@@ -26,6 +26,10 @@ const Toolbar = ({ messages, selectAll, markAsRead, markAsUnread, applyLabel, re
           unread {unreadCount === 1 ? 'message' : 'messages'}
         </p>
 
+        <button className="btn btn-danger" onClick={compose}>
+          <i className={`fa fa-plus`}></i>
+        </button>
+
         <button className="btn btn-default" onClick={selectAll}>
           <i className={`fa ${selectAllClass}`}></i>
         </button>
@@ -41,8 +45,8 @@ const Toolbar = ({ messages, selectAll, markAsRead, markAsUnread, applyLabel, re
         <select
           className="form-control label-select"
           disabled={selectedCount === 0}
-          onChange={(e) => {applyLabel(e.target.value); e.target.selectedIndex = 0}}
-          >
+          onChange={(event) => {applyLabel(event.target.value); event.target.selectedIndex = 0}}
+        >
           <option>Apply label</option>
           <option value="dev">dev</option>
           <option value="personal">personal</option>

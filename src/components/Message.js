@@ -9,13 +9,9 @@ const Message = ({ message, selectToggle, starToggle }) => {
     <span key={i} className="label label-warning">{label}</span>
   ))
 
-  const starMessage = (e) => {
-    e.stopPropagation()
-    starToggle(message)
-  }
 
   return (
-    <div className={`row message ${readClass} ${selectedClass}`} onClick={() => selectToggle(message)}>
+    <div className={`row message ${readClass} ${selectedClass}`}>
       <div className="col-xs-1">
         <div className="row">
           <div className="col-xs-2">
@@ -23,9 +19,10 @@ const Message = ({ message, selectToggle, starToggle }) => {
               type="checkbox"
               checked={ !!message.selected }
               readOnly={ true }
+              onClick={() => selectToggle(message)}
             />
           </div>
-          <div className="star-container col-xs-2" onClick={ starMessage }>
+          <div className="col-xs-2" onClick={() => starToggle(message)}>
             <i className={`star fa ${starClass}`}></i>
           </div>
         </div>
